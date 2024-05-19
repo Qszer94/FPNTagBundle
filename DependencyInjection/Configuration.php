@@ -18,16 +18,15 @@ class Configuration implements ConfigurationInterface
     /**
      * @see Symfony\Component\Config\Definition\ConfigurationInterface
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('fpn_tag');
+        $treeBuilder = new TreeBuilder('fpn_tag');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
                 ->arrayNode('model')
                     ->isRequired()
-                    ->cannotBeEmpty()
                     ->children()
                         ->scalarNode('tag_class')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('tagging_class')->isRequired()->cannotBeEmpty()->end()
